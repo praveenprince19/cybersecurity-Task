@@ -33,7 +33,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Users</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">Login</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="logout()" href="#signup">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -89,7 +89,12 @@
     <script src="js/scripts.js"></script>
     <script>
         $(document).ready(function () {
-            getdata();
+            var userSession = localStorage.getItem("UserDetails");
+            if(!userSession) {
+                $(location).attr('href','index.html');
+            }else {
+                getdata();
+            }
         });
         function getdata() {
             $.ajax({
@@ -133,7 +138,10 @@
             // download csv file
             downloadCSV(csv.join("\n"), filename);
         }
-
+        function logout() {
+            localStorage.clear();
+            $(location).attr('href','index.html');
+        }
         function downloadCSV(csv, filename) {
             var csvFile;
             var downloadLink;

@@ -11,5 +11,6 @@ router.get("/healthcheck", (req, res) => {
 
 router.get("/getUserList", UserController.getUserList); 
 
+router.post("/CheckUser", UserController.CheckUser); 
 
 module.exports = router;
